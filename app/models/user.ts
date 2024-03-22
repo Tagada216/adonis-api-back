@@ -4,6 +4,7 @@ import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, beforeSave, column } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
+import { AuthProviders } from '../enums/auth-providers.enum.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -24,7 +25,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare password: string
 
   @column()
-  declare provider: string | null
+  public providerId!: string
+
+  @column()
+  declare provider: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
