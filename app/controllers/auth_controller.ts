@@ -1,3 +1,4 @@
+import env from '#start/env'
 import type { HttpContext } from '@adonisjs/core/http'
 import { registerValidator, loginValidator } from '#validators/auth'
 import User from '#models/user'
@@ -14,7 +15,9 @@ export default class AuthController {
 
     const user = await User.verifyCredentials(email, password)
 
-    const token = await User.accessTokens.create(user)
+    const token = await User.accessTokens.create(user, ['*'], {
+      expiresIn: env.get('JWT_EXPIRY'),
+    })
 
     return response.ok({
       token: token,
