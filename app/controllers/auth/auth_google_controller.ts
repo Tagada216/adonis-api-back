@@ -1,7 +1,7 @@
 import env from '#start/env'
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
-import { AuthProviders } from '../enums/auth-providers.enum.js'
+import { AuthProviders } from '../../enums/auth-providers.enum.js'
 
 export default class AuthGoogleController {
   public async redirect({ ally }: HttpContext) {
@@ -35,13 +35,16 @@ export default class AuthGoogleController {
       provider: AuthProviders.google as string,
       providerId: user.id,
     }
+   
 
     const newUser = await User.firstOrCreate(findUser, userDetails)
 
     await User.accessTokens.create(newUser, ['*'], {
       expiresIn: env.get('JWT_EXPIRY'),
     })
-    response.status(201).json(newUser)
+    
+    
+    response.status(200)
 
     return newUser
   }

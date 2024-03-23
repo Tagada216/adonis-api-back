@@ -11,6 +11,12 @@ npm i
 cp .env.example .env
 `
 
+Create the database fieds with migration
+
+`
+node ace migration:run
+`
+
 ## Start 
 
 Start in develppoment mode
