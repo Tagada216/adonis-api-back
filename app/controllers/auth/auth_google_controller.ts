@@ -8,7 +8,7 @@ export default class AuthGoogleController {
     await ally.use('google').redirect()
   }
 
-  public async handleCallback({ ally, auth, response }: HttpContext) {
+  public async handleCallback({ ally, response }: HttpContext) {
     const googleUser = ally.use('google')
 
     if (googleUser.accessDenied()) {
