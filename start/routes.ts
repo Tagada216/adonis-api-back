@@ -10,7 +10,8 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
-const AuthController = () => import('#controllers/auth_controller')
+const AuthController = () => import('#controllers/auth/auth_controller')
+const AuthGoogleController = () => import('#controllers/auth/auth_google_controller')
 
 router
   .group(() => {
@@ -18,10 +19,15 @@ router
       .group(() => {
         router
           .group(() => {
-            router.post('register', [AuthController, 'register'])
-            router.post('login', [AuthController, 'login'])
+            
+              router.post('register', [AuthController, 'register'])
+              router.post('login', [AuthController, 'login'])
+            
+            router.get('google-signin', [AuthGoogleController, 'redirect'])
+            router.get('google-signin-callback', [AuthGoogleController, 'handleCallback'])
           })
-          .prefix('auth') // Auth routes ---
+          .prefix('auth') // Basic Auth routes ---
+
         router
           .get('me', async ({ auth, response }) => {
             try {
