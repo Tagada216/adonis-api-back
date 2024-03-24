@@ -24,14 +24,17 @@ export default class AuthGoogleController {
     }
 
     const user = await googleUser.user()
+    
 
     const findUser = {
       email: user.email as string,
     }
 
+    
+
     const userDetails = {
       email: user.email,
-      fullName: user.name,
+      fullName: user.original.given_name,
       provider: AuthProviders.google as string,
       providerId: user.id,
     }
@@ -39,13 +42,15 @@ export default class AuthGoogleController {
 
     const newUser = await User.firstOrCreate(findUser, userDetails)
 
-    await User.accessTokens.create(newUser, ['*'], {
+    const token = await User.accessTokens.create(newUser, ['*'], {
       expiresIn: env.get('JWT_EXPIRY'),
     })
     
     
-    response.status(200)
-
-    return newUser
+   return  response.ok({
+      token: token,
+      ...newUser.serialize()
+    })
+   
   }
 }
