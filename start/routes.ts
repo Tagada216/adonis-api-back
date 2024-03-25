@@ -20,15 +20,14 @@ router
       .group(() => {
         router
           .group(() => {
-            
             router.post('register', [AuthController, 'register'])
             router.post('login', [AuthController, 'login'])
-            
-            router.get('google-signin', [AuthGoogleController, 'redirect'])
-            router.get('google-signin-callback', [AuthGoogleController, 'handleCallback'])
 
-            router.get('facebook-signin', [AuthFacebookController, 'redirect'])
-            router.get('facebook-signin-callback', [AuthFacebookController, 'handleCallback'])
+            router.get('google/redirect', [AuthGoogleController, 'redirect'])
+            router.get('google/signin/callback', [AuthGoogleController, 'handleCallback'])
+
+            router.get('facebook/redirect', [AuthFacebookController, 'redirect'])
+            router.get('facebook/signin/callback', [AuthFacebookController, 'handleCallback'])
           })
           .prefix('auth') // Basic Auth  ---
 
