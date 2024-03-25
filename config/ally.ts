@@ -6,6 +6,7 @@ const allyConfig = defineConfig({
     clientId: env.get('FACEBOOK_CLIENT_ID'),
     clientSecret: env.get('FACEBOOK_CLIENT_SECRET'),
     callbackUrl: env.get('FACEBOOK_CALLBACK_URL') as string,
+
   }),
   google: services.google({
     clientId: env.get('GOOGLE_CLIENT_ID'),

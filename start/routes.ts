@@ -14,6 +14,7 @@ const AuthController = () => import('#controllers/auth/auth_controller')
 const AuthGoogleController = () => import('#controllers/auth/auth_google_controller')
 const AuthFacebookController = () => import('#controllers/auth/auth_facebook_controller')
 
+
 router
   .group(() => {
     router
@@ -30,6 +31,7 @@ router
             router.get('facebook/signin/callback', [AuthFacebookController, 'handleCallback'])
           })
           .prefix('auth') // Basic Auth  ---
+
 
         router
           .get('me', async ({ auth, response }) => {
