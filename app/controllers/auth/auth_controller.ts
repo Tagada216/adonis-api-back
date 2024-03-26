@@ -2,13 +2,13 @@ import env from '#start/env'
 import type { HttpContext } from '@adonisjs/core/http'
 import { registerValidator, loginValidator } from '#validators/auth'
 import User from '#models/user'
-import type {RegisterRequest} from "#controllers/interfaces/register.interface"
+import type { RegisterRequest } from '#controllers/interfaces/register.interface'
 import type { UserInterface } from '#controllers/interfaces/user.interface'
 
 export default class AuthController {
-  async register({ request, response }: HttpContext):Promise<void>{
+  async register({ request, response }: HttpContext): Promise<void> {
     const payload: RegisterRequest = await request.validateUsing(registerValidator)
-  
+
     const user: UserInterface = await User.create(payload)
     return response.status(201).json(user)
   }
