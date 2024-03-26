@@ -2,16 +2,16 @@ import type { HttpContext } from '@adonisjs/core/http'
 import env from '#start/env'
 import User from '#models/user'
 import { AuthProviders } from '../../enums/auth-providers.enum.js'
-import { verifyProvider } from '../auth/helpers/auth_provider_helper.js'
+import { isUniqueProvider } from '../auth/guards/auth_provider_guard.js'
 
 export default class AuthFacebooksController {
-  public async redirect({ ally }: HttpContext) {
+  async redirect({ ally }: HttpContext) {
     await ally.use('facebook').redirect((request) => {
       request.scopes(['public_profile', 'email'])
     })
   }
 
-  public async handleCallback({ ally, response }: HttpContext) {
+  async handleCallback({ ally, response }: HttpContext) {
     const facebookUser = ally.use('facebook')
 
     if (facebookUser.accessDenied()) {
@@ -28,7 +28,7 @@ export default class AuthFacebooksController {
 
     const user = await facebookUser.user()
 
-    const isProviderVerified = await verifyProvider(user.email, AuthProviders.facebook)
+    const isProviderVerified = await isUniqueProvider(user.email, AuthProviders.facebook)
 
     if (!isProviderVerified) {
       return response
