@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { withAuthFinder } from '@adonisjs/auth'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, beforeSave, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
@@ -28,6 +28,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column()
   declare provider: string
+
+  @column()
+  declare is_activated: boolean
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

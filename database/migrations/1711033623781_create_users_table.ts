@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('password').nullable()
       table.string('provider')
       table.string('provider_id')
+      table.boolean('is_activated').notNullable().defaultTo(false)
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()

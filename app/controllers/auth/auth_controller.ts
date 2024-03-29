@@ -13,7 +13,6 @@ export default class AuthController {
 
   async login({ request, response }: HttpContext) {
     const { email, password } = await request.validateUsing(loginValidator)
-    console.log('🚀 ~ AuthController ~ login ~ { email, password }:', { email, password })
 
     const { token, user } = await AuthService.login(email, password)
 
