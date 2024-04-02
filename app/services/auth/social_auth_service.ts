@@ -1,7 +1,7 @@
 import User from '#models/user'
 import env from '#start/env'
-import { AuthProviders } from '../enums/auth-providers.enum.js'
-import { isUniqueProvider } from '../guards/auth_provider_guard.js'
+import { AuthProviders } from '../../enums/auth-providers.enum.js'
+import { isUniqueProvider } from '../../guards/auth_provider_guard.js'
 
 class SocialAuthService {
   async handleFacebookCallback(facebookUser: any): Promise<{ token: string; user: any } | string> {

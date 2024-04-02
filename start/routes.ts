@@ -13,7 +13,9 @@ import { middleware } from './kernel.js'
 const AuthController = () => import('#controllers/auth/auth_controller')
 const AuthGoogleController = () => import('#controllers/auth/auth_google_controller')
 const AuthFacebookController = () => import('#controllers/auth/auth_facebook_controller')
-
+const ActivationsController = () => import('#controllers/activation/activations_controller')
+const PasswordResetsController = () =>
+  import('#controllers/password_reset/password_resets_controller')
 
 router
   .group(() => {
@@ -32,7 +34,6 @@ router
           })
           .prefix('auth') // Basic Auth  ---
 
-
         router
           .get('me', async ({ auth, response }) => {
             try {
@@ -45,6 +46,14 @@ router
             }
           })
           .use(middleware.auth()) // Protected routes ---
+
+        router
+          .group(() => {
+            router.get('activate', [ActivationsController, 'activate'])
+            router.post('forgot-password', [PasswordResetsController, 'forgot'])
+            router.post('reset-password', [PasswordResetsController, 'reset'])
+          })
+          .prefix('user') // User routes ---
       })
       .prefix('v1')
   })

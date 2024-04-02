@@ -1,7 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { registerValidator, loginValidator } from '#validators/auth'
 import type { RegisterRequest } from '#controllers/interfaces/register.interface'
-import AuthService from '#services/auth_service'
+import AuthService from '#services/auth/auth_service'
 
 export default class AuthController {
   async register({ request, response }: HttpContext): Promise<void> {

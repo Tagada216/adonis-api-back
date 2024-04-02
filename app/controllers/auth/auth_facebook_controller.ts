@@ -1,5 +1,5 @@
 // Importez le nouveau service
-import SocialAuthService from '#services/social_auth_service'
+import SocialAuthService from '#services/auth/social_auth_service'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class AuthFacebooksController {
