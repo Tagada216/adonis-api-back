@@ -49,7 +49,7 @@ router
 
         router
           .group(() => {
-            router.get('activate', [ActivationsController, 'activate'])
+            router.post('activate', [ActivationsController, 'activate'])
             router.post('forgot-password', [PasswordResetsController, 'forgot'])
             router.post('reset-password', [PasswordResetsController, 'reset'])
           })

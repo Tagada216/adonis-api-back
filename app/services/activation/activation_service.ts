@@ -5,7 +5,7 @@ import { DateTime } from 'luxon'
 import ActivationToken from '#models/activation_token'
 
 export class ActivationService {
-  static async sendActivationEmail(user: User, urlBase: string) {
+  static async sendActivationEmail(user: User, urlBase?: string): Promise<void> {
     const token = tokenUtils.generateToken()
     const expiresAt = DateTime.now().plus({ days: 2 })
 

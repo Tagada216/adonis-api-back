@@ -20,7 +20,7 @@ export default class EmailService {
     })
   }
 
-  static async sendActivationEmail(email: string, token: string, urlBase: string) {
+  static async sendActivationEmail(email: string, token: string, urlBase?: string) {
     const activationUrl = `${urlBase}/activate?token=${token}&email=${encodeURIComponent(email)}`
 
     await mail.send((message) => {

@@ -41,7 +41,8 @@ export class PasswordResetService {
     }
 
     const user = await User.findOrFail(resetToken.userId)
-    user.password = newPassword // Assurez-vous de hacher le mot de passe
+
+    user.password = newPassword
     await user.save()
 
     await resetToken.delete()
