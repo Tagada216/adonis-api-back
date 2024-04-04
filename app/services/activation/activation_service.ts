@@ -15,7 +15,7 @@ export class ActivationService {
       expiresAt: expiresAt,
     })
 
-    await EmailService.sendActivationEmail(user.email, token, urlBase)
+    await EmailService.sendActivationEmail(user.email, token, user.fullName, urlBase)
   }
   static async activateUser(email: string, token: string): Promise<boolean> {
     const activationToken = await ActivationToken.query()

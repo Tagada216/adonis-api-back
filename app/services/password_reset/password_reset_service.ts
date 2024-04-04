@@ -27,7 +27,7 @@ export class PasswordResetService {
 
     const resetPasswordUrl = `${urlBase}/reset-password?token=${token}`
 
-    await EmailService.sendResetPasswordEmail(email, resetPasswordUrl)
+    await EmailService.sendResetPasswordEmail(email, resetPasswordUrl, user.fullName)
   }
 
   static async resetPassword(token: string, newPassword: string): Promise<boolean> {

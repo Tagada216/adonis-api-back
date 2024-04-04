@@ -20,6 +20,14 @@ const mailConfig = defineConfig({
         user: env.get('SMTP_USERNAME') as string,
         pass: env.get('SMTP_PASSWORD') as string,
       },
+      tls: { rejectUnauthorized: false },
+
+      ignoreTLS: false,
+      requireTLS: false,
+
+      pool: false,
+      maxConnections: 5,
+      maxMessages: 100,
     }),
   },
 })
