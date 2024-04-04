@@ -1,5 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import SocialAuthService from '#services/social_auth_service'
+import SocialAuthService from '#services/auth/social_auth_service'
 
 export default class AuthGoogleController {
   async redirect({ ally }: HttpContext) {

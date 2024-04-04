@@ -2,11 +2,12 @@
 import env from '#start/env'
 import User from '#models/user'
 import type { RegisterRequest } from '#controllers/interfaces/register.interface'
-import hash from '@adonisjs/core/services/hash'
+import { ActivationService } from '#services/activation/activation_service'
 
 class AuthService {
   async register(payload: RegisterRequest) {
     const user = await User.create(payload)
+    await ActivationService.sendActivationEmail(user, env.get('BASE_URL'))
     return user
   }
 

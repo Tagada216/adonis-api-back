@@ -37,5 +37,13 @@ export default await Env.create(new URL('../', import.meta.url), {
   FACEBOOK_CLIENT_ID: Env.schema.string(),
   FACEBOOK_CLIENT_SECRET: Env.schema.string(),
   GOOGLE_CLIENT_ID: Env.schema.string(),
-  GOOGLE_CLIENT_SECRET: Env.schema.string()
+  GOOGLE_CLIENT_SECRET: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the mail package
+  |----------------------------------------------------------
+  */
+  SMTP_HOST: Env.schema.string(),
+  SMTP_PORT: Env.schema.string()
 })
