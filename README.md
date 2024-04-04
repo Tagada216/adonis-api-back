@@ -1,57 +1,21 @@
-# Adonis API BACK 
+# AdonisJS 6+ REST API boilerplate
 
-## Installation 
+[![image](https://miro.medium.com/v2/resize:fit:1400/1*9fWIkINvrOfiQwQsmg9UJQ.png)](https://github.com/new?template_name=adonisjs-boilerplate&template_owner=Tagada216)
 
-`
-git clone 
-`
+## Description <!-- omit in toc -->
 
-`
-npm i 
-cp .env.example .env
-`
+AdonisJS V6+ REST API boilerplate for typical project
 
-Create the database fieds with migration
+[Installation Documentation and Runnnig](/docs/installing-and-running.md)
 
-`
-node ace migration:run
-`
+## Table of Contents <!-- omit in toc -->
+- [Features](#features)
 
-## Start 
+## Features
 
-Start in develppoment mode
-
-`
-npm run dev
-`
-
-### Postgres local installation
-
-Use Docker for greater efficiency
-
-`
-docker run -d --name postgres_db -p 5432:5432 -e POSTGRES_PASSWORD=<env_password> postgres
-`
-
-On you Docker conainer CLI : 
-
-Connect on postgres
-`
-psql -h localhost -U postgres
-`
-
-Create your database: 
-
-`
-CREATE DATABASE <your_db_name>;
-`
-
-Some postgres command: 
-
-`
-\l # list a databases 
-
-\c <your_db_name> # connect on your db
-
-\d # view column on your db
-`
+- [x] Database PostgreSQL. Support [LucidORM](https://lucid.adonisjs.com/docs/introduction)
+- [x] Config Service ([adonisjs](https://docs.adonisjs.com/guides/config-providers)).
+- [x] Mailing ([nodemailer](https://www.npmjs.com/package/nodemailer)).
+- [x] Sign in and sign up via email.
+- [x] Social sign in (Facebook, Google).
+- [x] Docker.
