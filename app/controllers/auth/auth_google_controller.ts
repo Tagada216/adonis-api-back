@@ -8,8 +8,6 @@ export default class AuthGoogleController {
 
   async handleCallback({ ally, response }: HttpContext) {
     const googleUser = ally.use('google')
-
-    // Utilisez le service pour gérer le callback de Google
     const result = await SocialAuthService.handleGoogleCallback(googleUser)
 
     if (typeof result === 'string') {

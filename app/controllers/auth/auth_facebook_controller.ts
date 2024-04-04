@@ -12,7 +12,6 @@ export default class AuthFacebooksController {
   async handleCallback({ ally, response }: HttpContext) {
     const facebookUser = ally.use('facebook')
 
-    // Utilisez le service pour gérer le callback de Facebook
     const result = await SocialAuthService.handleFacebookCallback(facebookUser)
 
     if (typeof result === 'string') {
