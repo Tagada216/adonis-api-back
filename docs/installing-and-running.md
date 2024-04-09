@@ -1,7 +1,5 @@
 # Installation
 
-AdonisJS Boilerplate supports [LucidORM](https://lucid.adonisjs.com/docs/introduction) for working with databases. By default, TypeORM uses PostgreSQL as the main database.
-
 --
 
 ## Table of Contents
@@ -15,13 +13,13 @@ AdonisJS Boilerplate supports [LucidORM](https://lucid.adonisjs.com/docs/introdu
 1. Clone repository
 
    ```bash
-   git clone --depth 1 https://github.com/Tagada216/adonisjs-boilerplate.git my-app
+   git clone https://github.com/Tagada216/adonis-api-back.git
    ```
 
 2. Go to folder, and copy `.env.example` as `.env`.
 
    ```bash
-   cd my-app/
+   cd adonis-api-back/
    cp .env.example .env
    ```
 
