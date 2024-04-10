@@ -30,6 +30,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare provider: string
 
   @column()
+  declare bio: string | null // Ajouter cette ligne pour la bio
+
+  @column()
   declare is_activated: boolean
 
   @column.dateTime({ autoCreate: true })
