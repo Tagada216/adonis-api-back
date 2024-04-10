@@ -57,6 +57,7 @@
     "@adonisjs/lucid": "^20.1.0",
     "@adonisjs/mail": "^9.2.1",
     "@vinejs/vine": "^1.8.0",
+    "cloudinary": "^2.1.0",
     "edge.js": "^6.0.2",
     "install": "^0.13.0",
     "luxon": "^3.4.4",
