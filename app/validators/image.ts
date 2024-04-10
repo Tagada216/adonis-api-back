@@ -4,12 +4,9 @@ export const createImagesValidator = vine.compile(
   vine.object({
     images: vine
       .array(
-        vine.object({
-          image: vine.file({
-            size: '5mb',
-            extnames: ['jpg', 'png', 'jpeg'],
-          }),
-          isMain: vine.boolean(),
+        vine.file({
+          size: '5mb',
+          extnames: ['jpg', 'png', 'jpeg'],
         })
       )
       .maxLength(10),
