@@ -69,7 +69,9 @@ router
             router
               .get(':user_id/profile', [ProfilesController, 'getProfilesByUser'])
               .use(middleware.auth())
-            router.delete(':profileId', [ProfilesController, 'delete']).use(middleware.auth())
+            router
+              .delete('profile/:profileId', [ProfilesController, 'delete'])
+              .use(middleware.auth())
           })
 
           .prefix('user') // User routes ---
