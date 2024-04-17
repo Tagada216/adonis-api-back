@@ -17,6 +17,7 @@ const ActivationsController = () => import('#controllers/activation/activations_
 const PasswordResetsController = () =>
   import('#controllers/password_reset/password_resets_controller')
 const ImagesController = () => import('#controllers/images/images_controller')
+const ProfilesController = () => import('#controllers/profiles/profiles_controller')
 router
   .group(() => {
     router
@@ -49,16 +50,26 @@ router
 
         router
           .group(() => {
+            // - Account route
             router.post('activate', [ActivationsController, 'activate'])
             router.post('forgot-password', [PasswordResetsController, 'forgot'])
             router.post('reset-password', [PasswordResetsController, 'reset'])
 
+            // - images routes
             router.get('images', [ImagesController, 'index']).use(middleware.auth())
             router.get(':user_id/images', [ImagesController, 'getAllByUserId'])
             router.post('image', [ImagesController, 'store']).use(middleware.auth())
             router
               .delete('image/:id', [ImagesController, 'destroy'])
               .use([middleware.auth(), middleware.isOwner()])
+
+            // - Profile routes
+            router.post('profile', [ProfilesController, 'addProfile']).use(middleware.auth())
+            router.get('profiles/me', [ProfilesController, 'getProfiles']).use(middleware.auth())
+            router
+              .get(':user_id/profile', [ProfilesController, 'getProfilesByUser'])
+              .use(middleware.auth())
+            router.delete(':profileId', [ProfilesController, 'delete']).use(middleware.auth())
           })
 
           .prefix('user') // User routes ---
