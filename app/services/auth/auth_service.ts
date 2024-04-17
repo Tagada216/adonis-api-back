@@ -1,9 +1,7 @@
-// app/Services/AuthService.ts
 import env from '#start/env'
 import User from '#models/user'
 import type { RegisterRequest } from '#controllers/interfaces/register.interface'
 import { ActivationService } from '#services/activation/activation_service'
-import { UserInterface } from '../../controllers/interfaces/user.interface.js'
 
 class AuthService {
   async register(payload: RegisterRequest) {
