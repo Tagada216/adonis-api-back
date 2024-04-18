@@ -46,7 +46,7 @@ class SocialAuthService {
     return { token: token.toString(), user: newUser }
   }
 
-  async handleGoogleCallback(googleUser: any): Promise<{ token: string; user: any } | string> {
+  async handleGoogleCallback(googleUser: any): Promise<any> {
     if (googleUser.accessDenied()) {
       return 'Access Denied'
     }
@@ -85,7 +85,7 @@ class SocialAuthService {
       expiresIn: env.get('JWT_EXPIRY'),
     })
 
-    return { token: token.toString(), user: newUser }
+    return { token, newUser }
   }
 }
 
