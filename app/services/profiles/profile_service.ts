@@ -1,3 +1,4 @@
+import env from '#start/env'
 import User from '#models/user'
 import Profile from '#models/profile'
 
@@ -40,6 +41,26 @@ class ProfilesService {
     }
     await profile.delete()
     return true
+  }
+
+  async selectProfile(userId: number, profileId: number) {
+    const user = await User.find(userId)
+
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    const profile = await Profile.find(profileId)
+    if (!profile || profile.userId !== userId) {
+      throw new Error('Profile not found or access denied')
+    }
+
+    const token = await User.accessTokens.create(user, ['*'], {
+      name: `selected_id:${profileId}`,
+      expiresIn: env.get('JWT_EXPIRY'),
+    })
+
+    return { token }
   }
 }
 
