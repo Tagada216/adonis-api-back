@@ -17,9 +17,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
-  declare fullName: string | null
-
-  @column()
   declare email: string
 
   @column({ serializeAs: null })
@@ -32,7 +29,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare provider: string
 
   @column()
-  declare bio: string | null // Ajouter cette ligne pour la bio
+  declare bio: string
+
+  @column()
+  declare accountType: string
 
   @column()
   declare is_activated: boolean

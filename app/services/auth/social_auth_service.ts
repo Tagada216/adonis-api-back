@@ -2,7 +2,7 @@ import User from '#models/user'
 import env from '#start/env'
 import { AuthProviders } from '../../enums/auth-providers.enum.js'
 import { isUniqueProvider } from '../../guards/auth_provider_guard.js'
-
+import { AccountType } from '../../enums/account-type.enum.js'
 class SocialAuthService {
   async handleFacebookCallback(facebookUser: any): Promise<{ token: string; user: any } | string> {
     if (facebookUser.accessDenied()) {
@@ -31,9 +31,10 @@ class SocialAuthService {
 
     const userDetails = {
       email: user.email,
-      fullName: user.original.first_name,
       provider: AuthProviders.facebook,
       providerId: user.id,
+      bio: 'bio',
+      accountType: AccountType.solo,
     }
 
     const newUser = await User.firstOrCreate(findUser, userDetails)
@@ -72,9 +73,10 @@ class SocialAuthService {
 
     const userDetails = {
       email: user.email,
-      fullName: user.original.given_name,
       provider: AuthProviders.google,
       providerId: user.id,
+      bio: 'bio',
+      accountType: AccountType.solo,
     }
 
     const newUser = await User.firstOrCreate(findUser, userDetails)
