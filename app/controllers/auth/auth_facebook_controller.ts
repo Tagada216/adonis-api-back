@@ -1,5 +1,5 @@
 // Importez le nouveau service
-import SocialAuthService from '#services/auth/social_auth_service'
+import social_auth_service from '#services/auth/social_auth_service'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class AuthFacebooksController {
@@ -12,7 +12,7 @@ export default class AuthFacebooksController {
   async handleCallback({ ally, response }: HttpContext) {
     const facebookUser = ally.use('facebook')
 
-    const result = await SocialAuthService.handleFacebookCallback(facebookUser)
+    const result = await social_auth_service.handleFacebookCallback(facebookUser)
 
     if (typeof result === 'string') {
       return response.badRequest({ message: result })

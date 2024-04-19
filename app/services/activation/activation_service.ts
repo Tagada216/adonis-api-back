@@ -4,8 +4,8 @@ import EmailService from '#services/email/email_service'
 import { DateTime } from 'luxon'
 import ActivationToken from '#models/activation_token'
 
-export class ActivationService {
-  static async sendActivationEmail(user: User, urlBase?: string): Promise<void> {
+class ActivationService {
+  async sendActivationEmail(user: User, urlBase?: string): Promise<void> {
     const token = tokenUtils.generateToken()
     const expiresAt = DateTime.now().plus({ days: 2 })
 
@@ -15,9 +15,9 @@ export class ActivationService {
       expiresAt: expiresAt,
     })
 
-    await EmailService.sendActivationEmail(user.email, token, user.fullName, urlBase)
+    await EmailService.sendActivationEmail(user.email, token, urlBase)
   }
-  static async activateUser(email: string, token: string): Promise<boolean> {
+  async activateUser(email: string, token: string): Promise<boolean> {
     const activationToken = await ActivationToken.query()
       .whereHas('user', (query) => {
         query.where('email', email)
@@ -38,3 +38,5 @@ export class ActivationService {
     return true
   }
 }
+
+export default new ActivationService()
