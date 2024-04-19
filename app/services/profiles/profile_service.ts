@@ -1,22 +1,35 @@
 import env from '#start/env'
 import User from '#models/user'
 import Profile from '#models/profile'
+import { DateTime } from 'luxon'
 
 class ProfilesService {
   async createProfile(userId: number, profileData: any) {
     const user = await User.find(userId)
+
+    if (!user) {
+      throw new Error('User not found')
+    }
+
     const profiles = await user!.related('profiles').query()
     if (profiles.length >= 2) {
       throw new Error('Maximum de deux profils par utilisateur autorisé.')
     }
-    if (user) {
-      const profile = await Profile.create({
-        ...profileData,
-        userId: user.id,
-      })
-      return profile
+
+    if (profileData.dob) {
+      const dob = DateTime.fromISO(new Date(profileData.dob).toISOString())
+
+      if (!dob.isValid) {
+        throw new Error('Invalid date of birth format')
+      }
+      profileData.dob = dob
     }
-    throw new Error('User not found')
+
+    const profile = await Profile.create({
+      ...profileData,
+      userId: user.id,
+    })
+    return profile
   }
 
   async getAllByUserId(user_id: string) {
