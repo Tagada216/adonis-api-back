@@ -4,19 +4,19 @@ import type {
   RegisterRequest,
   RegisterResponseBody,
 } from '#controllers/interfaces/register.interface'
-import AuthService from '#services/auth/auth_service'
+import auth_service from '#services/auth/auth_service'
 
 export default class AuthController {
   async register({ request, response }: HttpContext): Promise<void> {
     const payload: RegisterRequest = await request.validateUsing(registerValidator)
-    const user: RegisterResponseBody = await AuthService.register(payload)
+    const user: RegisterResponseBody = await auth_service.register(payload)
     return response.status(201).json(user)
   }
 
   async login({ request, response }: HttpContext): Promise<void> {
     const { email, password } = await request.validateUsing(loginValidator)
 
-    const { token, user } = await AuthService.login(email, password)
+    const { token, user } = await auth_service.login(email, password)
 
     return response.ok({
       token: token,

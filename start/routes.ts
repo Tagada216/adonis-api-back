@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import MatchesController from '#controllers/matches/matches_controller'
 
 const AuthController = () => import('#controllers/auth/auth_controller')
 const AuthGoogleController = () => import('#controllers/auth/auth_google_controller')
@@ -19,6 +20,7 @@ const PasswordResetsController = () =>
 const ImagesController = () => import('#controllers/images/images_controller')
 const ProfilesController = () => import('#controllers/profiles/profiles_controller')
 const UsersController = () => import('#controllers/users/users_controller')
+const SwipesController = () => import('#controllers/swipes/swipes_controller')
 
 router
   .group(() => {
@@ -35,7 +37,7 @@ router
             router.get('facebook/redirect', [AuthFacebookController, 'redirect'])
             router.get('facebook/signin/callback', [AuthFacebookController, 'handleCallback'])
           })
-          .prefix('auth') // Basic Auth  ---
+          .prefix('auth') //  Auth  ---
 
         router
           .get('me', async ({ auth, response }) => {
@@ -80,8 +82,20 @@ router
 
             // -- User routes
             router.put('update-profile', [UsersController, 'updateProfile']).use(middleware.auth())
+
+            //-- Matches route
+            router.get('matches', [MatchesController, 'getAllMatches']).use(middleware.auth())
+            router
+              .delete('match/:matchId', [MatchesController, 'deleteMatch'])
+              .use(middleware.auth())
           })
           .prefix('user') // User routes ---
+
+        router
+          .group(() => {
+            router.post('swipe', [SwipesController, 'swipe']).use(middleware.auth())
+          })
+          .prefix('actions') // Actions route
       })
       .prefix('v1')
   })
