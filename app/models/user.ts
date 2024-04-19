@@ -37,6 +37,18 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare is_activated: boolean
 
+  @column()
+  declare city: string | null
+
+  @column()
+  declare latitude: number | null
+
+  @column()
+  declare longitude: number | null
+
+  @column()
+  declare country: string | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

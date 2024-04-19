@@ -10,6 +10,7 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 import MatchesController from '#controllers/matches/matches_controller'
+import LocationsController from '#controllers/locations/locations_controller'
 
 const AuthController = () => import('#controllers/auth/auth_controller')
 const AuthGoogleController = () => import('#controllers/auth/auth_google_controller')
@@ -82,8 +83,10 @@ router
 
             // -- User routes
             router.put('update-profile', [UsersController, 'updateProfile']).use(middleware.auth())
+            router.put('update-location', [LocationsController, 'update']).use(middleware.auth())
 
             //-- Matches route
+
             router.get('matches', [MatchesController, 'getAllMatches']).use(middleware.auth())
             router
               .delete('match/:matchId', [MatchesController, 'deleteMatch'])

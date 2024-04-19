@@ -13,6 +13,10 @@ export default class extends BaseSchema {
       table.text('bio').notNullable()
       table.enu('account_type', ['duo', 'solo'])
       table.boolean('is_activated').notNullable().defaultTo(false)
+      table.string('city').nullable()
+      table.float('latitude').nullable()
+      table.float('longitude').nullable()
+      table.string('country').nullable()
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
